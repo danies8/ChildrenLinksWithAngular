@@ -1,0 +1,86 @@
+<div class="panel panel-primary">
+
+  <br>
+  <div class="panel-heading">
+    {{pageTitle}}
+  </div>
+  <br>
+
+  <div class="panel-body">
+    <form class="form-horizontal" novalidate (ngSubmit)="saveLink()" [formGroup]="linkForm">
+
+      <fieldset *ngIf="link">
+        <div class="form-group" >
+          <label class="col-md-2 control-label" for="nameId">Name</label>
+          <div class="col-md-8">
+            <input class="form-control" 
+            id="nameId" type="url" 
+            placeholder="Name (required)" 
+            formControlName="name"
+            [ngClass]="{'is-invalid': displayMessage.name }" />
+            <span class="invalid-feedback">
+                {{displayMessage.name}}
+              </span>
+            
+        </div>
+        </div>
+
+        <div class="form-group" >
+          <label class="col-md-2 control-label" for="urlId">Link Value</label>
+          <div class="col-md-8">
+            <input  
+            class="form-control" 
+            id="urlId" type="url" 
+            formControlName="url"
+            placeholder="Url (required)" 
+            [ngClass]="{'is-invalid': displayMessage.url }" />
+            <span class="invalid-feedback">
+                {{displayMessage.url}}
+              </span> 
+            </div>
+        </div>
+
+        <div class="form-group" >
+          <label class="col-md-2 control-label" for="imageUrlId">Link URL</label>
+          <div class="col-md-8">
+            <input 
+            formControlName="imageUrl" 
+            class="form-control" id="imageUrlId" type="url" 
+            placeholder="URL (required)" 
+            [ngClass]="{'is-invalid': displayMessage.imageUrl }" />
+            <span class="invalid-feedback">
+                {{displayMessage.imageUrl}}
+              </span>
+           </div>
+        </div>
+
+
+        <div class="has-error" *ngIf="errorMessage">{{errorMessage}}</div>
+
+        <div class="form-group">
+          <div class="col-md-4 col-md-offset-2">
+            <span>
+              <button class="btn btn-primary" type="submit" style="width:80px;margin-right:10px"
+                [disabled]='!linkForm.valid' >
+                Save
+              </button>
+            </span>
+            <span>
+              <a class="btn btn-default" style="width:80px" (click)="cancel()">
+                Cancel
+              </a>
+            </span>
+            <span>
+              <a class="btn btn-default" style="width:80px" (click)="deleteLink()">
+                Delete
+              </a>
+            </span>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
+<div *ngIf='errorMessage' class='alert alert-danger'>
+  Error: {{ displayMessage }}
+</div>
